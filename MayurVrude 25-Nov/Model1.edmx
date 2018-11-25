@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbpktappsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblclass">
+          <Key>
+            <PropertyRef Name="c_classid" />
+          </Key>
+          <Property Name="c_classid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_classname" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblclassstudent">
+          <Key>
+            <PropertyRef Name="c_classstudentid" />
+          </Key>
+          <Property Name="c_classstudentid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_classid" Type="bigint" />
+          <Property Name="c_studentid" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tbluser">
+          <Key>
+            <PropertyRef Name="c_userid" />
+          </Key>
+          <Property Name="c_userid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_username" Type="nchar" MaxLength="500" Nullable="false" />
+          <Property Name="c_password" Type="nchar" MaxLength="500" Nullable="false" />
+          <Property Name="c_usertype" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="dbpktappsModelStoreContainer">
+          <EntitySet Name="tblclass" EntityType="Self.tblclass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblclassstudent" EntityType="Self.tblclassstudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbluser" EntityType="Self.tbluser" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbpktappsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblclass">
+          <Key>
+            <PropertyRef Name="c_classid" />
+          </Key>
+          <Property Name="c_classid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_classname" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblclassstudent">
+          <Key>
+            <PropertyRef Name="c_classstudentid" />
+          </Key>
+          <Property Name="c_classstudentid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_classid" Type="Int64" />
+          <Property Name="c_studentid" Type="Int64" />
+        </EntityType>
+        <EntityType Name="tbluser">
+          <Key>
+            <PropertyRef Name="c_userid" />
+          </Key>
+          <Property Name="c_userid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_username" Type="String" MaxLength="500" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="c_password" Type="String" MaxLength="500" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="c_usertype" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="dbpktappsEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblclasses" EntityType="Self.tblclass" />
+          <EntitySet Name="tblclassstudents" EntityType="Self.tblclassstudent" />
+          <EntitySet Name="tblusers" EntityType="Self.tbluser" />
+          <FunctionImport Name="login" ReturnType="Collection(dbpktappsModel.login_Result)">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="login_Result">
+          <Property Type="Int64" Name="c_userid" Nullable="false" />
+          <Property Type="String" Name="c_username" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="c_password" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="c_usertype" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbpktappsModelStoreContainer" CdmEntityContainer="dbpktappsEntities1">
+          <EntitySetMapping Name="tblclasses">
+            <EntityTypeMapping TypeName="dbpktappsModel.tblclass">
+              <MappingFragment StoreEntitySet="tblclass">
+                <ScalarProperty Name="c_classid" ColumnName="c_classid" />
+                <ScalarProperty Name="c_classname" ColumnName="c_classname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblclassstudents">
+            <EntityTypeMapping TypeName="dbpktappsModel.tblclassstudent">
+              <MappingFragment StoreEntitySet="tblclassstudent">
+                <ScalarProperty Name="c_classstudentid" ColumnName="c_classstudentid" />
+                <ScalarProperty Name="c_classid" ColumnName="c_classid" />
+                <ScalarProperty Name="c_studentid" ColumnName="c_studentid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblusers">
+            <EntityTypeMapping TypeName="dbpktappsModel.tbluser">
+              <MappingFragment StoreEntitySet="tbluser">
+                <ScalarProperty Name="c_userid" ColumnName="c_userid" />
+                <ScalarProperty Name="c_username" ColumnName="c_username" />
+                <ScalarProperty Name="c_password" ColumnName="c_password" />
+                <ScalarProperty Name="c_usertype" ColumnName="c_usertype" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="login" FunctionName="dbpktappsModel.Store.login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbpktappsModel.login_Result">
+                <ScalarProperty Name="c_userid" ColumnName="c_userid" />
+                <ScalarProperty Name="c_username" ColumnName="c_username" />
+                <ScalarProperty Name="c_password" ColumnName="c_password" />
+                <ScalarProperty Name="c_usertype" ColumnName="c_usertype" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
