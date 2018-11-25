@@ -11,10 +11,13 @@ namespace MayurVrude_25_Nov
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblclass
     {
         public long c_classid { get; set; }
+        [Required]
+        [Display(Name = "Class Name")]
         public string c_classname { get; set; }
     }
 }

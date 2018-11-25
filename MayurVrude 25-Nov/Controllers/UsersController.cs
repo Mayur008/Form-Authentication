@@ -12,12 +12,13 @@ using MayurVrude_25_Nov.Comman;
 
 namespace MayurVrude_25_Nov.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private dbpktappsEntities1 db = new dbpktappsEntities1();
 
         // GET: Users
-        [Authorize ]
+        
         public ActionResult Index()
         {
               List<tbluser> lstuser = new List<tbluser>();

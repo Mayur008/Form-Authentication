@@ -32,7 +32,7 @@ namespace MayurVrude_25_Nov.Controllers
             }
 
             if (tbluser != null)
-            {                
+            {
                 FormsAuthentication.SetAuthCookie(tbluser.c_userid.ToString(), false);
 
                 var authTicket = new FormsAuthenticationTicket(1, tbluser.c_userid.ToString(), DateTime.Now, DateTime.Now.AddMinutes(20), false, tbluser.c_usertype.ToString());
@@ -48,9 +48,11 @@ namespace MayurVrude_25_Nov.Controllers
             }
         }
 
-        private ActionResult View(object model)
+
+        public ActionResult Logout()
         {
-            throw new NotImplementedException();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Login");
         }
     }
 }

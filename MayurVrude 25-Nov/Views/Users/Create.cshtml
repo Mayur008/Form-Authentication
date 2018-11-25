@@ -1,4 +1,6 @@
-﻿@model MayurVrude_25_Nov.tbluser
+﻿
+
+@model MayurVrude_25_Nov.tbluser
 
 @{
     ViewBag.Title = "Create";
@@ -6,6 +8,25 @@
 
 <h2>Create</h2>
 
+@{ 
+
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = MayurVrude_25_Nov.Comman.Enum.UserType.Admin.ToString(),
+        Value = MayurVrude_25_Nov.Comman.Enum.UserType.Admin.GetHashCode().ToString()
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = MayurVrude_25_Nov.Comman.Enum.UserType.Faculty.ToString(),
+        Value = MayurVrude_25_Nov.Comman.Enum.UserType.Faculty.GetHashCode().ToString()
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = MayurVrude_25_Nov.Comman.Enum.UserType.Student.ToString(),
+        Value = MayurVrude_25_Nov.Comman.Enum.UserType.Student.GetHashCode().ToString()
+    });
+}
 
 @using (Html.BeginForm()) 
 {
@@ -34,7 +55,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.c_usertype, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.c_usertype, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.c_usertype, listItems, "-- Select Status --", new { htmlAttributes = new { @class = "form-control" } })
+               
                 @Html.ValidationMessageFor(model => model.c_usertype, "", new { @class = "text-danger" })
             </div>
         </div>

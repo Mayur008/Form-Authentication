@@ -1,13 +1,10 @@
-﻿@model MayurVrude_25_Nov.tbluser
+﻿    @model MayurVrude_25_Nov.tbluser
 
-<!DOCTYPE html>
+    @{
+    }
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
+    <h2>Login</h2>
+
 
     @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmlogin" }))
     {
@@ -31,14 +28,18 @@
                     @Html.ValidationMessageFor(model => model.c_password, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-10 text-danger field-validation-error">@ViewBag.message</div>
-            </div>
+            </div> 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Login" class="btn btn-default" />
                 </div>
-
+           
             </div>
         </div>
     }
-</body>
-</html>
+
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
